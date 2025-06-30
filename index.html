@@ -71,6 +71,9 @@
       margin: 6px 0 4px 0;
       font-size: 1em;
     }
+    ul {
+      padding-left: 20px;
+    }
   </style>
 </head>
 <body>
@@ -143,7 +146,8 @@
                 <div>Add to Meal Plan</div>
                 <div style={{cursor:"pointer"}} onClick={() => goTo('recipeDetail')}>⬅ Back</div>
               </div>
-              <div className="button" onClick={() => goTo('mealPlanCalendar')}>Save</div>
+              <p>Date selection and portion options here.</p>
+              <div className="button" onClick={() => goTo('mealPlanCalendar')}>Save Meal Plan</div>
             </div>
           )}
 
@@ -151,7 +155,7 @@
             <div className="screen">
               <div className="header">
                 <div>Meal Plan Calendar</div>
-                <div style={{cursor:"pointer"}} onClick={() => goTo('recipeList')}>⬅ Back</div>
+                <div style={{cursor:"pointer"}} onClick={() => goTo('recipeList')}>⬅ Home</div>
               </div>
               <p style={{textAlign:'center'}}>Calendar View Placeholder</p>
               <div className="button" onClick={() => goTo('pantryChecklist')}>Generate Shopping List</div>
@@ -183,7 +187,7 @@
                 <li>Flour - 500g</li>
                 <li>Milk - 1 liter</li>
               </ul>
-              <div className="button" onClick={() => alert('Exported!')}>Export</div>
+              <div className="button" onClick={() => { alert('Exported!'); goTo('recipeList'); }}>Export and Finish</div>
             </div>
           )}
         </div>
