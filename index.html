@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Home Organization App - Mobile Mockups</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #eaf4fb;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .container {
+    max-width: 400px;
+    width: 100%;
+  }
+  .screen {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .header {
+    background: #2f80ed;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .search {
+    margin-top: 10px;
+  }
+  .search input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  .chips {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    padding: 6px 12px;
+    background: #f2f2f2;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  .chip.active {
+    background: #2f80ed;
+    color: white;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  .card {
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  .card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .card h3 {
+    margin: 6px 0 4px 0;
+    font-size: 1em;
+  }
+  .badges {
+    display: flex;
+    gap: 6px;
+    font-size: 0.85em;
+  }
+  .badge {
+    background: #eaf4fb;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .section {
+    margin-top: 10px;
+  }
+  .button {
+    display: inline-block;
+    background: #2f80ed;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-top: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .button:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9em;
+  }
+  table, th, td {
+    border: 1px solid #ccc;
+  }
+  th, td {
+    padding: 6px;
+    text-align: left;
+  }
+  input[type="checkbox"] {
+    transform: scale(1.2);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="screen">
+  <div class="header">
+    <div>Recipe List</div>
+    <div>👤</div>
+  </div>
+  <div class="search">
+    <input type="text" placeholder="Search recipes..." />
+  </div>
+  <div class="chips">
+    <div class="chip active">Breakfast</div>
+    <div class="chip">Lunch</div>
+    <div class="chip">Dinner</div>
+    <div class="chip">Quick Meals</div>
+    <div class="chip">Favorites</div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <img src="https://www.inspiredtaste.net/wp-content/uploads/2019/03/Spaghetti-with-Meat-Sauce-Recipe-3-1200.jpg" />
+      <h3>Spaghetti</h3>
+      <div class="badges">
+        <div class="badge">30 min</div>
+        <div class="badge">Serves 4</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://www.sweetashoney.co/wp-content/uploads/Omelette-2-1024x640.jpg" />
+      <h3>Omelette</h3>
+      <div class="badges">
+        <div class="badge">15 min</div>
+        <div class="badge">Serves 2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="screen">
+  <div class="header">Recipe Detail</div>
+  <img src="https://www.inspiredtaste.net/wp-content/uploads/2019/03/Spaghetti-with-Meat-Sauce-Recipe-3-1200.jpg" style="width:100%;border-radius:6px;margin-top:10px;" />
+  <div class="section">
+    <div class="badges">
+      <div class="badge">30 min</div>
+      <div class="badge">Serves 4</div>
+    </div>
+    <div class="button">Add to Calendar</div>
+  </div>
+  <div class="section">
+    <h3>Ingredients</h3>
+    <ul>
+      <li>2 cups flour</li>
+      <li>1 egg</li>
+      <li>1 cup milk</li>
+    </ul>
+  </div>
+  <div class="section">
+    <h3>Instructions</h3>
+    <ol>
+      <li>Mix ingredients.</li>
+      <li>Bake for 20 minutes.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="screen">
+  <div class="header">Add to Meal Plan</div>
+  <div class="section">
+    <label>Date: <input type="date" /></label>
+  </div>
+  <div class="section">
+    <label>Meal Slot:
+      <select>
+        <option>Breakfast</option>
+        <option>Lunch</option>
+        <option>Dinner</option>
+      </select>
+    </label>
+  </div>
+  <div class="section">
+    <label>Number of Servings: <input type="number" min="1" /></label>
+  </div>
+  <div class="section">
+    <strong>Select Family Members:</strong><br/>
+    <label><input type="checkbox" /> Mom</label>
+    <label><input type="checkbox" /> Dad</label>
+    <label><input type="checkbox" /> Kid 1</label>
+    <label><input type="checkbox" /> Kid 2</label>
+  </div>
+  <div class="button">Save</div>
+</div>
+
+<div class="screen">
+  <div class="header">Meal Plan Calendar</div>
+  <p style="text-align:center;">[Monthly calendar with planned meals]</p>
+</div>
+
+<div class="screen">
+  <div class="header">Pantry Checklist</div>
+  <table>
+    <tr><th>Ingredient</th><th>Quantity</th><th>Have?</th></tr>
+    <tr><td>Eggs</td><td>6</td><td><input type="checkbox" /></td></tr>
+    <tr><td>Flour</td><td>500g</td><td><input type="checkbox" /></td></tr>
+    <tr><td>Milk</td><td>1 liter</td><td><input type="checkbox" /></td></tr>
+  </table>
+  <div class="button">Generate Shopping List</div>
+</div>
+
+<div class="screen">
+  <div class="header">Shopping List</div>
+  <ul>
+    <li>Flour - 500g <input type="checkbox" /></li>
+    <li>Milk - 1 liter <input type="checkbox" /></li>
+  </ul>
+  <div class="button">Export</div>
+</div>
+
+</div>
+</body>
+</html>
