@@ -3,6 +3,10 @@ const { useState } = React;
 function App() {
   const [screen, setScreen] = useState('recipeList');
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedDate, setSelectedDate] = useState('');
+  const [servings, setServings] = useState(1);
+  const [plannedMeals, setPlannedMeals] = useState([]);
+  const [checkedIngredients, setCheckedIngredients] = useState({});
 
   const recipes = [
     {
@@ -13,21 +17,21 @@ function App() {
       ingredients: [
         '8 ounces spaghetti',
         '2 to 3 tablespoons olive oil',
-        '3 to 4 cloves garlic, finely minced',
-        '1 can (14.5 ounces) diced tomatoes (undrained)',
-        'Salt and freshly ground black pepper, to taste',
-        '1/4 teaspoon crushed red pepper flakes, or to taste',
-        '1 teaspoon dried basil (or fresh to garnish)',
-        '1/4 cup grated Parmesan cheese, optional'
+        '3 to 4 cloves garlic',
+        '1 can diced tomatoes',
+        'Salt and pepper',
+        'Red pepper flakes',
+        'Basil',
+        'Parmesan cheese'
       ],
       instructions: [
         'Cook spaghetti according to package directions; drain and set aside.',
-        'While spaghetti cooks, add olive oil to a large skillet and heat over medium-high heat.',
-        'Add the garlic and sauté for about 1 minute, stirring constantly.',
-        'Add the diced tomatoes (with juices), salt, pepper, red pepper flakes, and basil.',
-        'Stir to combine and simmer for 5 minutes.',
-        'Add cooked spaghetti and toss to coat evenly.',
-        'Sprinkle with Parmesan and serve immediately.'
+        'While spaghetti cooks, heat olive oil in skillet over medium-high heat.',
+        'Add garlic and sauté 1 minute.',
+        'Add tomatoes, salt, pepper, red pepper flakes, and basil.',
+        'Simmer 5 minutes.',
+        'Add spaghetti and toss.',
+        'Sprinkle with Parmesan.'
       ]
     },
     {
@@ -38,22 +42,43 @@ function App() {
       ingredients: [
         '2 large eggs',
         '2 tablespoons milk',
-        'Salt and pepper, to taste',
+        'Salt and pepper',
         '1 tablespoon butter',
-        '1/4 cup shredded cheese (optional)',
-        'Chopped herbs or vegetables (optional)'
+        '1/4 cup shredded cheese',
+        'Herbs or vegetables'
       ],
       instructions: [
-        'In a bowl, whisk eggs, milk, salt, and pepper.',
-        'Heat butter in a non-stick skillet over medium heat.',
-        'Pour in egg mixture and swirl to coat the pan evenly.',
-        'Cook without stirring until the edges set.',
-        'Add cheese and any fillings if desired.',
-        'Fold omelette in half and cook for 1-2 minutes more.',
-        'Slide onto a plate and serve warm.'
+        'Whisk eggs, milk, salt, and pepper.',
+        'Heat butter in skillet.',
+        'Pour eggs and cook until edges set.',
+        'Add cheese and fillings.',
+        'Fold and cook 1-2 minutes.',
+        'Serve warm.'
       ]
     }
   ];
+
+  const handleSaveMeal = () => {
+    setPlannedMeals([...plannedMeals, {
+      date: selectedDate,
+      recipe: selectedRecipe,
+      servings
+    }]);
+    setScreen('mealPlanCalendar');
+  };
+
+  const allIngredients = Array.from(new Set(
+    plannedMeals.flatMap(m => m.recipe.ingredients)
+  ));
+
+  const toggleIngredient = (ingredient) => {
+    setCheckedIngredients(prev => ({
+      ...prev,
+      [ingredient]: !prev[ingredient]
+    }));
+  };
+
+  const shoppingList = allIngredients.filter(i => !checkedIngredients[i]);
 
   return (
     <div className="container">
@@ -64,7 +89,7 @@ function App() {
             <div>👤</div>
           </div>
           <div className="cards">
-            {recipes.map((r) => (
+            {recipes.map(r => (
               <div
                 key={r.name}
                 className="card"
@@ -102,33 +127,46 @@ function App() {
               ))}
             </ol>
           </div>
-          <div className="button" onClick={() => setScreen('addToCalendar')}>Add to Calendar</div>
+          <div className="button" onClick={() => setScreen('addToCalendar')}>
+            Add to Calendar
+          </div>
         </div>
       )}
 
-{screen === 'addToCalendar' && (
-  <div className="screen">
-    <div className="header">
-      <div>Add to Meal Plan</div>
-      <div style={{cursor:"pointer"}} onClick={() => setScreen('recipeDetail')}>⬅ Back</div>
-    </div>
-    <div style={{marginTop: '10px'}}>
-      <label>
-        <strong>Select Date:</strong><br />
-        <input type="date" style={{marginTop: '5px'}} />
-      </label>
-    </div>
-    <div style={{marginTop: '10px'}}>
-      <label>
-        <strong>Number of Servings:</strong><br />
-        <input type="number" min="1" defaultValue="1" style={{marginTop: '5px', width: '60px'}} />
-      </label>
-    </div>
-    <div className="button" style={{marginTop: '15px'}} onClick={() => setScreen('mealPlanCalendar')}>
-      Save Meal Plan
-    </div>
-  </div>
-)}
+      {screen === 'addToCalendar' && (
+        <div className="screen">
+          <div className="header">
+            <div>Add to Meal Plan</div>
+            <div style={{cursor:"pointer"}} onClick={() => setScreen('recipeDetail')}>⬅ Back</div>
+          </div>
+          <div style={{marginTop: '10px'}}>
+            <label>
+              <strong>Select Date:</strong><br />
+              <input
+                type="date"
+                value={selectedDate}
+                onChange={e => setSelectedDate(e.target.value)}
+                style={{marginTop:'5px',width:'100%'}}
+              />
+            </label>
+          </div>
+          <div style={{marginTop:'10px'}}>
+            <label>
+              <strong>Number of Servings:</strong><br />
+              <input
+                type="number"
+                min="1"
+                value={servings}
+                onChange={e => setServings(e.target.value)}
+                style={{marginTop:'5px',width:'100%'}}
+              />
+            </label>
+          </div>
+          <div className="button" style={{marginTop:'15px'}} onClick={handleSaveMeal}>
+            Save Meal Plan
+          </div>
+        </div>
+      )}
 
       {screen === 'mealPlanCalendar' && (
         <div className="screen">
@@ -136,8 +174,20 @@ function App() {
             <div>Meal Plan Calendar</div>
             <div style={{cursor:"pointer"}} onClick={() => setScreen('recipeList')}>⬅ Home</div>
           </div>
-          <p style={{textAlign:'center'}}>Calendar View Placeholder</p>
-          <div className="button" onClick={() => setScreen('pantryChecklist')}>Generate Shopping List</div>
+          {plannedMeals.length === 0 ? (
+            <p>No meals planned.</p>
+          ) : (
+            <ul>
+              {plannedMeals.map((m, i) => (
+                <li key={i}>
+                  <strong>{m.date || 'No date'}</strong>: {m.recipe.name} ({m.servings} servings)
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="button" onClick={() => setScreen('pantryChecklist')}>
+            Generate Shopping List
+          </div>
         </div>
       )}
 
@@ -147,12 +197,24 @@ function App() {
             <div>Pantry Checklist</div>
             <div style={{cursor:"pointer"}} onClick={() => setScreen('mealPlanCalendar')}>⬅ Back</div>
           </div>
-          <ul>
-            <li><input type="checkbox" /> Eggs</li>
-            <li><input type="checkbox" /> Flour</li>
-            <li><input type="checkbox" /> Milk</li>
-          </ul>
-          <div className="button" onClick={() => setScreen('shoppingList')}>Continue</div>
+          {allIngredients.length === 0 ? (
+            <p>No ingredients to check.</p>
+          ) : (
+            <ul>
+              {allIngredients.map(i => (
+                <li key={i}>
+                  <input
+                    type="checkbox"
+                    checked={!!checkedIngredients[i]}
+                    onChange={() => toggleIngredient(i)}
+                  /> {i}
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="button" onClick={() => setScreen('shoppingList')}>
+            Continue
+          </div>
         </div>
       )}
 
@@ -162,11 +224,18 @@ function App() {
             <div>Shopping List</div>
             <div style={{cursor:"pointer"}} onClick={() => setScreen('recipeList')}>⬅ Home</div>
           </div>
-          <ul>
-            <li>Flour - 500g</li>
-            <li>Milk - 1 liter</li>
-          </ul>
-          <div className="button" onClick={() => { alert('Exported!'); setScreen('recipeList'); }}>Export and Finish</div>
+          {shoppingList.length === 0 ? (
+            <p>All ingredients checked off!</p>
+          ) : (
+            <ul>
+              {shoppingList.map(i => (
+                <li key={i}>{i}</li>
+              ))}
+            </ul>
+          )}
+          <div className="button" onClick={() => { alert('Shopping list saved!'); setScreen('recipeList'); }}>
+            Export and Finish
+          </div>
         </div>
       )}
     </div>
