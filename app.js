@@ -106,16 +106,29 @@ function App() {
         </div>
       )}
 
-      {screen === 'addToCalendar' && (
-        <div className="screen">
-          <div className="header">
-            <div>Add to Meal Plan</div>
-            <div style={{cursor:"pointer"}} onClick={() => setScreen('recipeDetail')}>⬅ Back</div>
-          </div>
-          <p>Date selection and portion options here.</p>
-          <div className="button" onClick={() => setScreen('mealPlanCalendar')}>Save Meal Plan</div>
-        </div>
-      )}
+{screen === 'addToCalendar' && (
+  <div className="screen">
+    <div className="header">
+      <div>Add to Meal Plan</div>
+      <div style={{cursor:"pointer"}} onClick={() => setScreen('recipeDetail')}>⬅ Back</div>
+    </div>
+    <div style={{marginTop: '10px'}}>
+      <label>
+        <strong>Select Date:</strong><br />
+        <input type="date" style={{marginTop: '5px'}} />
+      </label>
+    </div>
+    <div style={{marginTop: '10px'}}>
+      <label>
+        <strong>Number of Servings:</strong><br />
+        <input type="number" min="1" defaultValue="1" style={{marginTop: '5px', width: '60px'}} />
+      </label>
+    </div>
+    <div className="button" style={{marginTop: '15px'}} onClick={() => setScreen('mealPlanCalendar')}>
+      Save Meal Plan
+    </div>
+  </div>
+)}
 
       {screen === 'mealPlanCalendar' && (
         <div className="screen">
