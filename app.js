@@ -10,13 +10,49 @@ function App() {
       time: '30 min',
       servings: 'Serves 4',
       image: 'https://www.inspiredtaste.net/wp-content/uploads/2019/03/Spaghetti-with-Meat-Sauce-Recipe-3-1200.jpg',
+      ingredients: [
+        '8 ounces spaghetti',
+        '2 to 3 tablespoons olive oil',
+        '3 to 4 cloves garlic, finely minced',
+        '1 can (14.5 ounces) diced tomatoes (undrained)',
+        'Salt and freshly ground black pepper, to taste',
+        '1/4 teaspoon crushed red pepper flakes, or to taste',
+        '1 teaspoon dried basil (or fresh to garnish)',
+        '1/4 cup grated Parmesan cheese, optional'
+      ],
+      instructions: [
+        'Cook spaghetti according to package directions; drain and set aside.',
+        'While spaghetti cooks, add olive oil to a large skillet and heat over medium-high heat.',
+        'Add the garlic and sauté for about 1 minute, stirring constantly.',
+        'Add the diced tomatoes (with juices), salt, pepper, red pepper flakes, and basil.',
+        'Stir to combine and simmer for 5 minutes.',
+        'Add cooked spaghetti and toss to coat evenly.',
+        'Sprinkle with Parmesan and serve immediately.'
+      ]
     },
     {
       name: 'Omelette',
       time: '15 min',
       servings: 'Serves 2',
       image: 'https://www.sweetashoney.co/wp-content/uploads/Omelette-2-1024x640.jpg',
-    },
+      ingredients: [
+        '2 large eggs',
+        '2 tablespoons milk',
+        'Salt and pepper, to taste',
+        '1 tablespoon butter',
+        '1/4 cup shredded cheese (optional)',
+        'Chopped herbs or vegetables (optional)'
+      ],
+      instructions: [
+        'In a bowl, whisk eggs, milk, salt, and pepper.',
+        'Heat butter in a non-stick skillet over medium heat.',
+        'Pour in egg mixture and swirl to coat the pan evenly.',
+        'Cook without stirring until the edges set.',
+        'Add cheese and any fillings if desired.',
+        'Fold omelette in half and cook for 1-2 minutes more.',
+        'Slide onto a plate and serve warm.'
+      ]
+    }
   ];
 
   return (
@@ -50,6 +86,22 @@ function App() {
             <div style={{cursor:"pointer"}} onClick={() => setScreen('recipeList')}>⬅ Back</div>
           </div>
           <img src={selectedRecipe.image} style={{width:'100%',borderRadius:'6px',marginTop:'10px'}} />
+          <div className="section">
+            <h3>Ingredients</h3>
+            <ul>
+              {selectedRecipe.ingredients.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="section">
+            <h3>Instructions</h3>
+            <ol>
+              {selectedRecipe.instructions.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
+            </ol>
+          </div>
           <div className="button" onClick={() => setScreen('addToCalendar')}>Add to Calendar</div>
         </div>
       )}
