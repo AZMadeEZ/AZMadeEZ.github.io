@@ -1,39 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>React No-JSX Example</title>
+  <meta charset="UTF-8" />
+  <title>Home Organization App</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div id="root"></div>
+
+  <!-- React Libraries -->
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script>
-    const { useState } = React;
-
-    function App() {
-      const [screen, setScreen] = useState('home');
-
-      if (screen === 'home') {
-        return React.createElement(
-          'div',
-          null,
-          React.createElement('h1', null, '✅ Home Screen'),
-          React.createElement('button', { onClick: () => setScreen('detail') }, 'Go to Detail')
-        );
-      }
-
-      if (screen === 'detail') {
-        return React.createElement(
-          'div',
-          null,
-          React.createElement('h1', null, '🍽️ Detail Screen'),
-          React.createElement('button', { onClick: () => setScreen('home') }, 'Back')
-        );
-      }
-    }
-
-    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
-  </script>
+  <!-- Babel to process JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Your App Code -->
+  <script type="text/babel" src="app.js"></script>
 </body>
 </html>
